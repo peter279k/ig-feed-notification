@@ -44,7 +44,7 @@ class CheckPost
             ->where('post_id', '=', $postId)
             ->get()
             ->toJson();
-        $result = json_decode($result, false);
+        $result = json_decode($result, true);
 
         return count($result) !== 0;
     }
