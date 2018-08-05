@@ -102,7 +102,7 @@ try {
 
             $mail->send();
 
-            $checkPost->insertPostId($feed->getId());
+            $checkPost->insertPostId($media->getId());
         }
     }
 
