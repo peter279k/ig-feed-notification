@@ -9,7 +9,7 @@ This is the simple web service and it can send the latest Instagram feed with sp
 - php>=5.6
 - Composer
 - SMTP server
-- MySQL
+- MySQL/MariaDB
 
 ## Usage
 
