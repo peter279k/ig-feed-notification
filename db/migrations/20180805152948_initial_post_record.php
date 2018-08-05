@@ -37,7 +37,7 @@ class InitialPostRecord extends AbstractMigration
             'id' => true,
         ]);
 
-        $table->addColumn('post_id', 'string', ['limit' => 11, 'comment' => 'The Instagram post id']);
+        $table->addColumn('post_id', 'string', ['limit' => 19, 'comment' => 'The Instagram post id']);
 
         $table->create();
     }

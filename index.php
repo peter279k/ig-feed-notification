@@ -57,34 +57,6 @@ try {
     $msg = wordwrap($msg,70);
 
     $checkPost = new CheckPost();
-    if (!$checkPost->postIsExisted($feed->getId())) {
-        // send email
-        $mail = new PHPMailer(true);
-        $mail->SMTPDebug = 0; // Set the SMTP Debug mode it can set 0, 1, 2
-        $mail->isSMTP();
-        $mail->Host = getenv('MAIL_HOST');  // Specify main and backup SMTP servers
-        $mail->SMTPAuth = true;        // Enable SMTP authentication
-        $mail->Username = getenv('MAIL_USERNAME');  // SMTP username
-        $mail->Password = getenv('MAIL_PASSWORD'); // SMTP password
-        $mail->SMTPSecure = 'tls';        // Enable TLS encryption, `ssl` also accepted
-        $mail->Port = 587;
-
-        //Recipients
-        $mail->setFrom('admin@igclerks.com', 'Mailer');
-        $mail->addAddress('dsamsondeen@gmail.com', 'dsamsondeen');
-
-
-        //Content
-        $mail->isHTML(true); // Set email format to HTML
-        $mail->Subject = 'New Instagram Posts';
-        $mail->Body    = $msg;
-        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-        $mail->send();
-        echo 'The email Message has been sent';
-
-        $checkPost->insertPostId($feed->getId());
-    }
 
     // Second Page
 
@@ -105,6 +77,33 @@ try {
         echo 'Caption   : ' . $media->getCaption() . "<br/>";
         echo 'Link      : ' . $media->getLink() . "<br/>";
         echo '============================' . "<br/>";
+
+        if (!$checkPost->postIsExisted($media->getId())) {
+            // send email
+            $mail = new PHPMailer(true);
+            $mail->SMTPDebug = 0; // Set the SMTP Debug mode it can set 0, 1, 2
+            $mail->isSMTP();
+            $mail->Host = getenv('MAIL_HOST');  // Specify main and backup SMTP servers
+            $mail->SMTPAuth = true;        // Enable SMTP authentication
+            $mail->Username = getenv('MAIL_USERNAME');  // SMTP username
+            $mail->Password = getenv('MAIL_PASSWORD'); // SMTP password
+            $mail->SMTPSecure = 'tls';        // Enable TLS encryption, `ssl` also accepted
+            $mail->Port = 587;
+
+            //Recipients
+            $mail->setFrom('admin@igclerks.com', 'Mailer');
+            $mail->addAddress('dsamsondeen@gmail.com', 'dsamsondeen');
+
+            //Content
+            $mail->isHTML(true); // Set email format to HTML
+            $mail->Subject = $media->getCaption();
+            $mail->Body    = $msg;
+            $mail->AltBody = $media->getLink();
+
+            $mail->send();
+
+            $checkPost->insertPostId($feed->getId());
+        }
     }
 
     // And etc...
