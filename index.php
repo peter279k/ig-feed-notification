@@ -57,7 +57,7 @@ try {
     $msg = wordwrap($msg,70);
 
     $checkPost = new CheckPost();
-    if ($checkPost->postIsExisted($feed->getId()) !== false) {
+    if (!$checkPost->postIsExisted($feed->getId())) {
         // send email
         $mail = new PHPMailer(true);
         $mail->SMTPDebug = 0; // Set the SMTP Debug mode it can set 0, 1, 2
