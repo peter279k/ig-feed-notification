@@ -16,7 +16,7 @@ use IgFeedNotification\CheckPost;
 
 $cache = new CacheManager('./ig_cache');
 $api   = new Api($cache);
-$api->setUserName('esocialpanel');
+$api->setUserName('drealdsa');
 
 $dotenv = new Dotenv(__DIR__);
 $dotenv->load();
