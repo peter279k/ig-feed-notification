@@ -52,7 +52,7 @@ try {
         $msg .= '============================' . "<br/>";
         echo $msg;
 
-        $postId = explode('/', 'https://www.instagram.com/p/BmG5g0kg_pK/');
+        $postId = explode('/', $media->getLink());
 
         if (!$checkPost->postIsExisted($postId[4])) {
             SendMail::sendMail($msg, $media);
@@ -83,6 +83,14 @@ try {
         echo 'Caption   : ' . $media->getCaption() . "<br/>";
         echo 'Link      : ' . $media->getLink() . "<br/>";
         echo '============================' . "<br/>";
+
+        $postId = explode('/', $media->getLink());
+
+        if (!$checkPost->postIsExisted($postId[4])) {
+            SendMail::sendMail($msg, $media);
+            $checkPost->insertPostId($postId[4]);
+        }
+
     }
 
     // And etc...
