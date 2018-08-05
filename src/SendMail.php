@@ -2,6 +2,9 @@
 
 namespace IgFeedNotification;
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 class SendMail
 {
     public function __construct() {}

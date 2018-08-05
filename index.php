@@ -4,8 +4,6 @@ date_default_timezone_set('Africa/Lagos');
 
 require_once __DIR__  . '/./vendor/autoload.php';
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 use Instagram\Storage\CacheManager;
 use Instagram\Api;
 use Dotenv\Dotenv;
