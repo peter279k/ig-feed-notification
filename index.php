@@ -52,9 +52,11 @@ try {
         $msg .= '============================' . "<br/>";
         echo $msg;
 
-        if (!$checkPost->postIsExisted($media->getId())) {
+        $postId = explode('/', 'https://www.instagram.com/p/BmG5g0kg_pK/');
+
+        if (!$checkPost->postIsExisted($media->getLink())) {
             SendMail::sendMail($msg, $media);
-            $checkPost->insertPostId($media->getId());
+            $checkPost->insertPostId($postId[4]);
         }
 
         break;
