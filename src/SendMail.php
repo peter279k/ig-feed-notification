@@ -26,7 +26,7 @@ class SendMail
         $mail->addAddress('dsamsondeen@gmail.com', 'dsamsondeen');
         //Content
         $mail->isHTML(true); // Set email format to HTML
-        $mail->Subject = $media->getCaption();
+        $mail->Subject = 'New Instagram Post';
         $mail->Body    = $msg;
         $mail->AltBody = $media->getLink();
         $mail->send();
