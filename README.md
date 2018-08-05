@@ -25,7 +25,7 @@ git clone https://github.com/peter279k/ig-feed-notification
 php composer.phar install -n
 ```
 
-- Copy the `.env.example` to `.env` and set the mail host, user name and password.
+- Copy the `.env.example` to `.env` and set the DB host, driver, database name, user name, user password, mail host, user name and password.
 
 ```
 cp .env.example .env
