@@ -21,6 +21,8 @@ $api->setUserName('esocialpanel');
 $dotenv = new Dotenv(__DIR__);
 $dotenv->load();
 
+$checkPost = new CheckPost();
+
 try {
     // First page
 
@@ -77,8 +79,6 @@ try {
     }
 
     $msg = wordwrap($msg,70);
-
-    $checkPost = new CheckPost();
 
     // Second Page
 
