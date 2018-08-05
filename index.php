@@ -3,7 +3,6 @@
 date_default_timezone_set('Africa/Lagos');
 
 require_once __DIR__  . '/./vendor/autoload.php';
-require_once __DIR__ . '/./src/CheckIgPost.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;

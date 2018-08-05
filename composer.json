@@ -14,5 +14,10 @@
         "illuminate/database": "^5.4",
         "robmorgan/phinx": "^0.10.5",
         "vlucas/phpdotenv": "^2.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "IgFeedNotification\\": "src/"
+        }
     }
 }
