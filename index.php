@@ -55,7 +55,7 @@ try {
         $postId = explode('/', $media->getLink());
 
         if (!$checkPost->postIsExisted($postId[4])) {
-            SendMail::sendMail($msg, $media);
+            SendMail::sendMail($msg, $media, $feed->getUserName());
             $checkPost->insertPostId($postId[4]);
         }
 
@@ -87,7 +87,7 @@ try {
         $postId = explode('/', $media->getLink());
 
         if (!$checkPost->postIsExisted($postId[4])) {
-            SendMail::sendMail($msg, $media);
+            SendMail::sendMail($msg, $media, $feed->getUserName());
             $checkPost->insertPostId($postId[4]);
         }
 

@@ -9,7 +9,7 @@ class SendMail
 {
     public function __construct() {}
 
-    public static function sendMail($msg, $media)
+    public static function sendMail($msg, $media, $userName)
     {
         // send email
         $mail = new PHPMailer(true);
@@ -22,7 +22,7 @@ class SendMail
         $mail->SMTPSecure = 'tls';        // Enable TLS encryption, `ssl` also accepted
         $mail->Port = getenv('MAIL_PORT');
         //Recipients
-        $mail->setFrom('admin@igclerks.com', 'New Instagram Post');
+        $mail->setFrom('admin@igclerks.com', 'New Instagram post from ' . $userName);
         $mail->addAddress('dsamsondeen@gmail.com', 'dsamsondeen');
         //Content
         $mail->isHTML(true); // Set email format to HTML
