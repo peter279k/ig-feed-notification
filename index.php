@@ -14,89 +14,89 @@ use IgFeedNotification\SendMail;
 
 $cache = new CacheManager('./ig_cache');
 $api   = new Api($cache);
-$api->setUserName('esocialpanel');
 
-$dotenv = new Dotenv(__DIR__);
-$dotenv->load();
+$userNamesInstruction = [
+    'esocialpanel' => 'Give him 10k Likes',
+    'storeklassy' => 'Give 10 comments',
+];
 
-$checkPost = new CheckPost();
+foreach ($userNamesInstruction as $userName => $instruction) {
+    $api->setUserName($userName);
 
-try {
-    // First page
+    $dotenv = new Dotenv(__DIR__);
+    $dotenv->load();
 
-    /** @var \Instagram\Hydrator\Component\Feed $feed */
-    $feed = $api->getFeed();
+    $checkPost = new CheckPost();
 
-    echo '============================' . "<br/>";
+    try {
+        // First page
 
-    echo 'User Informations : ' . "<br/>";
-    echo '============================' . "<br/><br/>";
+        /** @var \Instagram\Hydrator\Component\Feed $feed */
+        $feed = $api->getFeed();
 
-    echo 'ID        : ' . $feed->getId() . "<br/>";
-    echo 'Full Name : ' . $feed->getFullName() . "<br/>";
-    echo 'UserName  : ' . $feed->getUserName() . "<br/>";
-    echo 'Following : ' . $feed->getFollowing() . "<br/>";
-    echo 'Followers : ' . $feed->getFollowers() . "<br/><br/>";
-
-    echo '============================' . "<br/>";
-    echo 'Medias first page : ' . "<br/>";
-    echo '============================' . "<br/><br/>";
-
-    $msg = '';
-
-    /** @var \Instagram\Hydrator\Component\Media $media */
-    foreach ($feed->getMedias() as $media) {
-        $msg .= 'User Name : ' . $feed->getUserName() . "<br/>";
-        $msg .= 'Caption   : ' . $media->getCaption() . "<br/>";
-        $msg .= 'Link      : ' . $media->getLink() . "<br/>";
-        $msg .= '============================' . "<br/>";
-        echo $msg;
-
-        $postId = explode('/', $media->getLink());
-
-        if (!$checkPost->postIsExisted($postId[4])) {
-            SendMail::sendMail($msg, $media, $feed->getUserName());
-            $checkPost->insertPostId($postId[4]);
-        }
-
-        break;
-    }
-
-    $msg = wordwrap($msg,70);
-
-    // Second Page
-
-    $api->setEndCursor($feed->getEndCursor());
-
-    sleep(1); // avoir 429 Rate limit from Instagram
-
-    $feed = $api->getFeed();
-
-    echo "<br/><br/>";
-    echo '============================' . "<br/>";
-    echo 'Medias second page : ' . "<br/>";
-    echo '============================' . "<br/><br/>";
-
-    /** @var \Instagram\Hydrator\Component\Media $media */
-    foreach ($feed->getMedias() as $media) {
-        echo 'ID        : ' . $media->getId() . "<br/>";
-        echo 'Caption   : ' . $media->getCaption() . "<br/>";
-        echo 'Link      : ' . $media->getLink() . "<br/>";
         echo '============================' . "<br/>";
 
-        $postId = explode('/', $media->getLink());
+        echo 'User Informations : ' . "<br/>";
+        echo '============================' . "<br/><br/>";
 
-        if (!$checkPost->postIsExisted($postId[4])) {
-            SendMail::sendMail($msg, $media, $feed->getUserName());
-            $checkPost->insertPostId($postId[4]);
+        echo 'ID        : ' . $feed->getId() . "<br/>";
+        echo 'Full Name : ' . $feed->getFullName() . "<br/>";
+        echo 'UserName  : ' . $feed->getUserName() . "<br/>";
+        echo 'Following : ' . $feed->getFollowing() . "<br/>";
+        echo 'Followers : ' . $feed->getFollowers() . "<br/><br/>";
+
+        echo '============================' . "<br/>";
+        echo 'Medias first page : ' . "<br/>";
+        echo '============================' . "<br/><br/>";
+
+        $msg = '';
+
+        /** @var \Instagram\Hydrator\Component\Media $media */
+        foreach ($feed->getMedias() as $media) {
+            $msg .= 'User Name : ' . $feed->getUserName() . "<br/>";
+            $msg .= 'Caption   : ' . $media->getCaption() . "<br/>";
+            $msg .= 'Link      : ' . $media->getLink() . "<br/>";
+            $msg .= 'Instructions: ' . $instruction . "<br/>";
+            $msg .= '============================' . "<br/>";
+            echo $msg;
+
+            $postId = explode('/', $media->getLink());
+
+            if (!$checkPost->postIsExisted($postId[4])) {
+                SendMail::sendMail($msg, $media, $feed->getUserName());
+                $checkPost->insertPostId($postId[4]);
+            }
+
+            break;
         }
 
+        $msg = wordwrap($msg, 70);
+
+        // Second Page
+
+        $api->setEndCursor($feed->getEndCursor());
+
+        sleep(1); // avoir 429 Rate limit from Instagram
+
+        $feed = $api->getFeed();
+
+        echo "<br/><br/>";
+        echo '============================' . "<br/>";
+        echo 'Medias second page : ' . "<br/>";
+        echo '============================' . "<br/><br/>";
+
+        /** @var \Instagram\Hydrator\Component\Media $media */
+        foreach ($feed->getMedias() as $media) {
+            echo 'ID        : ' . $media->getId() . "<br/>";
+            echo 'Caption   : ' . $media->getCaption() . "<br/>";
+            echo 'Link      : ' . $media->getLink() . "<br/>";
+            echo 'Instructions: ' . $instruction . "<br/>";
+            echo '============================' . "<br/>";
+        }
+
+        // And etc...
+
+    } catch (\Instagram\Exception\InstagramException $exception) {
+        var_dump($exception->getMessage());
     }
-
-    // And etc...
-
-} catch (\Instagram\Exception\InstagramException $exception) {
-    var_dump($exception->getMessage());
 }
-
-// Second page
