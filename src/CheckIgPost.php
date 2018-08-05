@@ -13,7 +13,16 @@ class CheckPost
     public function __construct()
     {
         $capsule = new Manager;
-        $capsule->addConnection($c['settings']['db']);
+        $capsule->addConnection([
+            'driver' => getenv('DB_DRIVER'),
+            'host' => getenv('DB_HOST'),
+            'database' => getenv('DATABASE'),
+            'username' => getenv('DB_USERNAME'),
+            'password' => getenv('DB_PASSWORD'),
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+        ]);
 
         $capsule->setAsGlobal();
         $capsule->bootEloquent();
