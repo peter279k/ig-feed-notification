@@ -52,7 +52,10 @@ try {
         $msg .= '============================' . "<br/>";
         echo $msg;
 
-        SendMail::sendMail($msg, $media);
+        if (!$checkPost->postIsExisted($media->getId())) {
+            SendMail::sendMail($msg, $media);
+            $checkPost->insertPostId($media->getId());
+        }
 
         break;
     }

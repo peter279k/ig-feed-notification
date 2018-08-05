@@ -30,6 +30,5 @@ class SendMail
         $mail->Body    = $msg;
         $mail->AltBody = $media->getLink();
         $mail->send();
-        $checkPost->insertPostId($media->getId());
     }
 }
