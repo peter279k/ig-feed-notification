@@ -28,7 +28,7 @@ class CheckPost
         $capsule->bootEloquent();
 
         $this->capsule = $capsule;
-        $this->postIdTable = $this->capsule->table('post_record');
+        $this->postRecordTable = $this->capsule->table('post_record');
     }
 
     public function insertPostId($postId)
