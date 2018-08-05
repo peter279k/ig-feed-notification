@@ -13,7 +13,6 @@ use IgFeedNotification\SendMail;
 @mkdir('./ig_cache');
 
 $cache = new CacheManager('./ig_cache');
-$api   = new Api($cache);
 
 $userNamesInstruction = [
     'esocialpanel' => 'Give him 10k Likes',
@@ -21,6 +20,8 @@ $userNamesInstruction = [
 ];
 
 foreach ($userNamesInstruction as $userName => $instruction) {
+    $api   = new Api($cache);
+
     $api->setUserName($userName);
 
     $dotenv = new Dotenv(__DIR__);
