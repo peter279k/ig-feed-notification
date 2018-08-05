@@ -54,7 +54,7 @@ try {
 
         $postId = explode('/', 'https://www.instagram.com/p/BmG5g0kg_pK/');
 
-        if (!$checkPost->postIsExisted($media->getLink())) {
+        if (!$checkPost->postIsExisted($postId[4])) {
             SendMail::sendMail($msg, $media);
             $checkPost->insertPostId($postId[4]);
         }
