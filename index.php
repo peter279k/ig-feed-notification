@@ -62,7 +62,7 @@ try {
         $mail = new PHPMailer(true);
         $mail->SMTPDebug = 0; // Set the SMTP Debug mode it can set 0, 1, 2
         $mail->isSMTP();
-        $mail->Host = 'igclerks.com';  // Specify main and backup SMTP servers
+        $mail->Host = getenv('MAIL_HOST');  // Specify main and backup SMTP servers
         $mail->SMTPAuth = true;        // Enable SMTP authentication
         $mail->Username = getenv('MAIL_USERNAME');  // SMTP username
         $mail->Password = getenv('MAIL_PASSWORD'); // SMTP password
