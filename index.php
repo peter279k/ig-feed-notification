@@ -15,8 +15,8 @@ use IgFeedNotification\SendMail;
 $cache = new CacheManager('./ig_cache');
 
 $userNamesInstruction = [
-    'esocialpanel' => 'Give him 10k Likes',
-    'storeklassy' => 'Give 10 comments',
+    'user_name1' => 'Give him 10k Likes',
+    'user_name2' => 'Give 10 comments',
 ];
 
 foreach ($userNamesInstruction as $userName => $instruction) {
