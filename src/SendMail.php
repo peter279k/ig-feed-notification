@@ -22,8 +22,8 @@ class SendMail
         $mail->SMTPSecure = 'tls';        // Enable TLS encryption, `ssl` also accepted
         $mail->Port = getenv('MAIL_PORT');
         //Recipients
-        $mail->setFrom('admin@igclerks.com', 'New Instagram post from ' . $userName);
-        $mail->addAddress('dsamsondeen@gmail.com', 'dsamsondeen');
+        $mail->setFrom('admin@domain.admin.com', 'New Instagram post from ' . $userName);
+        $mail->addAddress('to_mail_address@gmail.com', 'receiver_name');
         //Content
         $mail->isHTML(true); // Set email format to HTML
         $mail->Subject = $media->getCaption();
