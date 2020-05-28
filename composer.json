@@ -10,7 +10,7 @@
     "require": {
         "php": ">=5.6",
         "pgrimaud/instagram-user-feed": "^5.0",
-        "phpmailer/phpmailer": "^6.0",
+        "phpmailer/phpmailer": "^6.1.6",
         "illuminate/database": "^5.4",
         "robmorgan/phinx": "^0.10.5",
         "vlucas/phpdotenv": "^2.5"
