@@ -1,3 +1,4 @@
 phinx.yml
 vendor/
 .env
+composer.lock
